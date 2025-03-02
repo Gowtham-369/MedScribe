@@ -38,7 +38,7 @@ function History({ role }) {
         // 2. For each consultation, fetch patient details using the patient_id
         const enrichedConsultations = await Promise.all(
           consultations.map(async (consultation) => {
-            const patientId = consultation.patient_id; 
+            const patientId = consultation.patient_id;
             let patientName = `Patient ID: ${patientId}`;
             let patientAge = 'N/A';
             let patientGender = 'N/A';
@@ -55,7 +55,6 @@ function History({ role }) {
                   }
                 );
                 const patientData = patientRes.data;
-                // Adjust these lines if your API returns different field names:
                 patientName = patientData.name || patientName;
                 patientAge = patientData.age || 'N/A';
                 patientGender = patientData.gender || 'N/A';
@@ -69,15 +68,16 @@ function History({ role }) {
 
             return {
               id: consultation.consultation_id,
-              fileId: consultation.file_id ?? 'N/A',
-              startDate: new Date(consultation.start_time).toLocaleDateString(),
-              startTime: new Date(consultation.start_time).toLocaleTimeString(),
+              rfileId: consultation.rfile_id ?? 'N/A',
+              ufileId: consultation.ufile_id ?? 'N/A',
+              startDate: new Date(consultation.start_time).toLocaleDateString() ?? '01 Mar 2025',
+              startTime: new Date(consultation.start_time).toLocaleTimeString() ?? '09:00:00',
               endDate: consultation.end_time
                 ? new Date(consultation.end_time).toLocaleDateString()
-                : 'N/A',
+                : '01 Mar 2025',
               endTime: consultation.end_time
                 ? new Date(consultation.end_time).toLocaleTimeString()
-                : 'N/A',
+                : '09:30:00',
               patientName,
               age: patientAge,
               gender: patientGender,
@@ -100,117 +100,98 @@ function History({ role }) {
   /********************************************************************
    *  PATIENT VIEW
    ********************************************************************/
-  /************************************************************
- *  PATIENT VIEW
- ************************************************************/
-useEffect(() => {
-  async function fetchPatientConsultations() {
-    try {
-      // 1. Fetch all consultations for the patient
-      const consultationRes = await axios.get(
-        'https://53ee-129-137-96-16.ngrok-free.app/consultations/patient/1',
-        {
-          headers: {
-            Accept: 'application/json',
-            'ngrok-skip-browser-warning': 'true',
-          },
-        }
-      );
-      const consultations = getArrayData(consultationRes.data);
-
-      // 2. For each consultation, fetch the doctor details using doctor_id
-      const enrichedConsultations = await Promise.all(
-        consultations.map(async (consultation) => {
-          const doctorId = consultation.doctor_id;
-          let doctorName = `Doctor ID: ${doctorId}`;
-          let doctorAge = 'N/A';
-          let doctorGender = 'N/A';
-
-          try {
-            if (doctorId) {
-              const doctorRes = await axios.get(
-                `https://53ee-129-137-96-16.ngrok-free.app/doctors/${doctorId}`,
-                {
-                  headers: {
-                    Accept: 'application/json',
-                    'ngrok-skip-browser-warning': 'true',
-                  },
-                }
-              );
-
-              // Log to see what exactly the API returns:
-              console.log("Doctor data for ID", doctorId, ":", doctorRes.data);
-
-              const doctorData = doctorRes.data;
-
-              // If the API returns an array, handle that:
-              if (Array.isArray(doctorData) && doctorData.length > 0) {
-                // If the array item has a "name" or "doctor_name" field:
-                doctorName =
-                  doctorData[0].name ||
-                  doctorData[0].doctor_name ||
-                  doctorName;
-                doctorAge = doctorData[0].age || 'N/A';
-                doctorGender = doctorData[0].gender || 'N/A';
-              } else if (doctorData && typeof doctorData === 'object') {
-                // If the API returns a single object:
-                doctorName =
-                  doctorData.name ||
-                  doctorData.doctor_name ||
-                  doctorName;
-                doctorAge = doctorData.age || 'N/A';
-                doctorGender = doctorData.gender || 'N/A';
-              }
-            }
-          } catch (error) {
-            console.error(
-              `Error fetching doctor data for consultation ${consultation.consultation_id}:`,
-              error
-            );
+  useEffect(() => {
+    async function fetchPatientConsultations() {
+      try {
+        // 1. Fetch all consultations for the patient
+        const consultationRes = await axios.get(
+          'https://53ee-129-137-96-16.ngrok-free.app/consultations/patient/1',
+          {
+            headers: {
+              Accept: 'application/json',
+              'ngrok-skip-browser-warning': 'true',
+            },
           }
+        );
+        const consultations = getArrayData(consultationRes.data);
 
-          return {
-            id: consultation.consultation_id,
-            fileId: consultation.file_id ?? 'N/A',
-            startDate: new Date(consultation.start_time).toLocaleDateString(),
-            startTime: new Date(consultation.start_time).toLocaleTimeString(),
-            endDate: consultation.end_time
-              ? new Date(consultation.end_time).toLocaleDateString()
-              : 'N/A',
-            endTime: consultation.end_time
-              ? new Date(consultation.end_time).toLocaleTimeString()
-              : 'N/A',
-            doctorName,
-            doctorAge,
-            doctorGender,
-            summary: consultation.summary || '',
-          };
-        })
-      );
+        // 2. For each consultation, fetch the doctor details using doctor_id
+        const enrichedConsultations = await Promise.all(
+          consultations.map(async (consultation) => {
+            const doctorId = consultation.doctor_id;
+            let doctorName = `Doctor ID: ${doctorId}`;
+            let doctorAge = 'N/A';
+            let doctorGender = 'N/A';
 
-      setPatientConsultations(enrichedConsultations);
-    } catch (error) {
-      console.error("Error fetching patient's consultations:", error);
+            try {
+              if (doctorId) {
+                const doctorRes = await axios.get(
+                  `https://53ee-129-137-96-16.ngrok-free.app/doctors/${doctorId}`,
+                  {
+                    headers: {
+                      Accept: 'application/json',
+                      'ngrok-skip-browser-warning': 'true',
+                    },
+                  }
+                );
+                const doctorData = doctorRes.data;
+                if (Array.isArray(doctorData) && doctorData.length > 0) {
+                  doctorName = doctorData[0].name || doctorData[0].doctor_name || doctorName;
+                  doctorAge = doctorData[0].age || 'N/A';
+                  doctorGender = doctorData[0].gender || 'N/A';
+                } else if (doctorData && typeof doctorData === 'object') {
+                  doctorName = doctorData.name || doctorData.doctor_name || doctorName;
+                  doctorAge = doctorData.age || 'N/A';
+                  doctorGender = doctorData.gender || 'N/A';
+                }
+              }
+            } catch (error) {
+              console.error(
+                `Error fetching doctor data for consultation ${consultation.consultation_id}:`,
+                error
+              );
+            }
+
+            return {
+              id: consultation.consultation_id,
+              rfileId: consultation.rfile_id ?? 'N/A',
+              ufileId: consultation.ufile_id ?? 'N/A',
+              startDate: new Date(consultation.start_time).toLocaleDateString(),
+              startTime: new Date(consultation.start_time).toLocaleTimeString(),
+              endDate: consultation.end_time
+                ? new Date(consultation.end_time).toLocaleDateString()
+                : 'N/A',
+              endTime: consultation.end_time
+                ? new Date(consultation.end_time).toLocaleTimeString()
+                : 'N/A',
+              doctorName,
+              doctorAge,
+              doctorGender,
+              summary: consultation.summary || '',
+            };
+          })
+        );
+
+        setPatientConsultations(enrichedConsultations);
+      } catch (error) {
+        console.error("Error fetching patient's consultations:", error);
+      }
     }
-  }
 
-  if (role === 'patient') {
-    fetchPatientConsultations();
-  }
-}, [role]);
-
+    if (role === 'patient') {
+      fetchPatientConsultations();
+    }
+  }, [role]);
 
   /********************************************************************
    *  FILTERING
    ********************************************************************/
-
   // Doctor: filter by patient name
   const filteredDoctorConsultations = doctorConsultations.filter((cons) =>
     cons.patientName.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   // Patient: filter by date range (comparing the startDate string).
-  // NOTE: If you need accurate comparisons, store ISO dates and compare as Date objects.
   const filteredPatientConsultations = patientConsultations.filter((cons) => {
     return (!fromDate || cons.startDate >= fromDate) && (!toDate || cons.startDate <= toDate);
   });
@@ -218,7 +199,6 @@ useEffect(() => {
   /********************************************************************
    *  RENDER
    ********************************************************************/
-
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-4">
@@ -251,7 +231,10 @@ useEffect(() => {
                       <span className="font-medium">Gender:</span> {cons.gender}
                     </p>
                     <p>
-                      <span className="font-medium">File ID:</span> {cons.fileId}
+                      <span className="font-medium">R File ID:</span> {cons.rfileId}
+                    </p>
+                    <p>
+                      <span className="font-medium">U File ID:</span> {cons.ufileId}
                     </p>
                     <p>
                       <span className="font-medium">Start Date:</span> {cons.startDate} at {cons.startTime}
@@ -300,16 +283,11 @@ useEffect(() => {
                     <p>
                       <span className="font-medium">Doctor:</span> {cons.doctorName}
                     </p>
-                    {/* If you want to display doctor's age/gender, uncomment below:
                     <p>
-                      <span className="font-medium">Age:</span> {cons.doctorAge}
+                      <span className="font-medium">R File ID:</span> {cons.rfileId}
                     </p>
                     <p>
-                      <span className="font-medium">Gender:</span> {cons.doctorGender}
-                    </p>
-                    */}
-                    <p>
-                      <span className="font-medium">File ID:</span> {cons.fileId}
+                      <span className="font-medium">U File ID:</span> {cons.ufileId}
                     </p>
                     <p>
                       <span className="font-medium">Start Date:</span> {cons.startDate} at {cons.startTime}
