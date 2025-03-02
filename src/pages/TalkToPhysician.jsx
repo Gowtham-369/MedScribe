@@ -210,6 +210,7 @@ function TalkToPhysician({ role }) {
   };
 
   return (
+    
     <div className="max-w-3xl mx-auto">
       <h1 className="text-3xl font-bold mb-4">
         {`Talk to ${role === 'patient' ? 'Physician' : 'Patient'}`}
