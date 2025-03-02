@@ -7,11 +7,11 @@ const processType = import.meta.env.VITE_PROCESS_TYPE;
 
 let senderKey, receiverKey;
 if (processType === 'A') {
-  senderKey = '789';
-  receiverKey = '456';
+  senderKey = 'Patient';
+  receiverKey = 'Doctor';
 } else {
-  senderKey = '456';
-  receiverKey = '789';
+  senderKey = 'Doctor';
+  receiverKey = 'Patient';
 }
 
 // Connect to chat_app running on port 5002
