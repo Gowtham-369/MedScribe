@@ -3,14 +3,14 @@ import { NavLink } from 'react-router-dom';
 
 function Sidebar({role}) {
   return (
-    <div className="bg-gray-800 text-white w-56 p-6">
-      <h2 className="text-2xl font-bold mb-6">Menu</h2>
-      <nav className="flex flex-col space-y-4">
+    <div className="bg-blue-800 text-white w-56 p-6">
+      <h2 className="text-3xl font-bold mb-6">Menu</h2>
+      <nav className="flex flex-col space-y-4 text-xl">
         <NavLink
-          to="/"
+          to="/home"
           end
           className={({ isActive }) =>
-            isActive ? "text-green-400" : "hover:underline"
+            isActive ? "text-yellow-400" : "hover:underline"
           }
         >
           Homepage
@@ -18,7 +18,7 @@ function Sidebar({role}) {
         <NavLink
           to="/talk"
           className={({ isActive }) =>
-            isActive ? "text-green-400" : "hover:underline"
+            isActive ? "text-yellow-400" : "hover:underline"
           }
         >
           Talk to {role === 'patient'?'Physician':'Patient'}
@@ -26,7 +26,7 @@ function Sidebar({role}) {
         <NavLink
           to="/history"
           className={({ isActive }) =>
-            isActive ? "text-green-400" : "hover:underline"
+            isActive ? "text-yellow-400" : "hover:underline"
           }
         >
           History
