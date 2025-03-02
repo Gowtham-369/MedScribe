@@ -167,9 +167,15 @@ function TalkToPhysician({ role }) {
         chunks.push(e.data);
       }
     };
+    // Store the start timestamp when recording begins
+    // const startTimestamp = Date.now().toString();
     recorder.onstop = async () => {
+      // Get the end timestamp when recording stops
+      // const endTimestamp = Date.now().toString();
       const blob = new Blob(chunks, { type: mimeType });
       const formData = new FormData();
+      // console.log(startTimestamp);
+      // console.log(endTimestamp);
       formData.append('audio', blob, 'recording.webm');
       try {
         const res = await fetch('http://localhost:5001/save-audio', { method: 'POST', body: formData });
