@@ -59,8 +59,7 @@ Ensure you have the following installed:
    cd medscribe-revuc2025
    ```
 2. Install dependencies:
-   ```sh
-   npm install
+   ``` run sh requirments.txt file
    ```
 3. Set up environment variables in a `.env` file:
    ```sh
@@ -70,12 +69,12 @@ Ensure you have the following installed:
    ```
 4. Start the backend server:
    ```sh
-   npm start
+   flask Run
    ```
 5. Navigate to the frontend directory and start the client:
    ```sh
-   cd client
-   npm start
+   cd MedScride
+   npm run dev
    ```
 
 ## Usage
