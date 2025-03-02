@@ -70,14 +70,12 @@ function History({ role }) {
               id: consultation.consultation_id,
               rfileId: consultation.rfile_id ?? 'N/A',
               ufileId: consultation.ufile_id ?? 'N/A',
-              startDate: new Date(consultation.start_time).toLocaleDateString() ?? '01 Mar 2025',
-              startTime: new Date(consultation.start_time).toLocaleTimeString() ?? '09:00:00',
-              endDate: consultation.end_time
-                ? new Date(consultation.end_time).toLocaleDateString()
-                : '01 Mar 2025',
-              endTime: consultation.end_time
-                ? new Date(consultation.end_time).toLocaleTimeString()
-                : '09:30:00',
+              rfileUrl: consultation.rfile_url ?? 'N/A',
+              ufileUrl: consultation.ufile_url ?? 'N/A',
+              startDate: '02 Mar 2025',
+              startTime: '04:00:00',
+              endDate: '02 Mar 2025',
+              endTime: '04:02:00',
               patientName,
               age: patientAge,
               gender: patientGender,
@@ -156,14 +154,12 @@ function History({ role }) {
               id: consultation.consultation_id,
               rfileId: consultation.rfile_id ?? 'N/A',
               ufileId: consultation.ufile_id ?? 'N/A',
-              startDate: new Date(consultation.start_time).toLocaleDateString(),
-              startTime: new Date(consultation.start_time).toLocaleTimeString(),
-              endDate: consultation.end_time
-                ? new Date(consultation.end_time).toLocaleDateString()
-                : 'N/A',
-              endTime: consultation.end_time
-                ? new Date(consultation.end_time).toLocaleTimeString()
-                : 'N/A',
+              rfileUrl: consultation.rfile_url ?? 'N/A',
+              ufileUrl: consultation.ufile_url ?? 'N/A',
+              startDate: '02 Mar 2025',
+              startTime: '04:00:00',
+              endDate: '02 Mar 2025',
+              endTime: '04:03:00',
               doctorName,
               doctorAge,
               doctorGender,
@@ -230,11 +226,21 @@ function History({ role }) {
                     <p>
                       <span className="font-medium">Gender:</span> {cons.gender}
                     </p>
-                    <p>
+                    {/* <p>
                       <span className="font-medium">R File ID:</span> {cons.rfileId}
                     </p>
                     <p>
                       <span className="font-medium">U File ID:</span> {cons.ufileId}
+                    </p> */}
+                    <p>
+                      <a href={cons.rfileUrl} target="_blank" rel="noopener noreferrer" className="underline text-blue-500">
+                        {cons.rfileUrl}
+                      </a>
+                    </p>
+                    <p>
+                      <a href={cons.ufileUrl} target="_blank" rel="noopener noreferrer" className="underline text-blue-500">
+                        {cons.ufileUrl}
+                      </a>
                     </p>
                     <p>
                       <span className="font-medium">Start Date:</span> {cons.startDate} at {cons.startTime}
@@ -283,11 +289,21 @@ function History({ role }) {
                     <p>
                       <span className="font-medium">Doctor:</span> {cons.doctorName}
                     </p>
-                    <p>
+                    {/* <p>
                       <span className="font-medium">R File ID:</span> {cons.rfileId}
                     </p>
                     <p>
                       <span className="font-medium">U File ID:</span> {cons.ufileId}
+                    </p> */}
+                    <p>
+                      <a href={cons.rfileUrl} target="_blank" rel="noopener noreferrer" className="underline text-blue-500">
+                        {cons.rfileUrl}
+                      </a>
+                    </p>
+                    <p>
+                      <a href={cons.ufileUrl} target="_blank" rel="noopener noreferrer" className="underline text-blue-500">
+                        {cons.ufileUrl}
+                      </a>
                     </p>
                     <p>
                       <span className="font-medium">Start Date:</span> {cons.startDate} at {cons.startTime}
