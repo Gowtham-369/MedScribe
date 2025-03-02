@@ -1,0 +1,20 @@
+Here's a structured medical report based on the provided doctor-patient conversation:
+
+**Medical Report**
+
+*   **Title**: Consultation for Upper Respiratory Symptoms
+
+*   **Description**: The patient contacted the doctor reporting several symptoms that started recently. The patient reported not eating well. They described experiencing significant sneezing, discomfort in the mouth and nose, mild fever, and poor sleep quality the previous night. The doctor inquired about additional symptoms beyond cold and cough, to which the patient responded negatively.
+
+*   **Medical Conditions**:
+    *   Possible upper respiratory infection (e.g., common cold), based on the described symptoms. However not enough information to be sure.
+
+*   **Suggestions and Medications**:
+    *   The doctor recommended taking paracetamol.
+    *   The doctor also advised the patient to sleep.
+
+*   **Results**:
+    *   No tests were ordered or performed during the consultation.
+
+*   **Overall Summary**:
+    The Doctor quickly concludes by recommending a common pain reliever, paracetamol, and sleep, suggesting the doctor assessed the condition as likely a minor, self-limiting illness (like a common cold). The lack of inquiry into symptom duration or severity is noteworthy, the very brief assessment.

@@ -1,0 +1,52 @@
+Created Conda Virtual env : 
+Medscribe
+
+Install the AWS Package : 
+sudo installer -pkg AWSCLIV2.pkg -target /
+
+Check the Version of aws : 
+aws --Version
+
+Configure : 
+aws configure
+
+AWS Access Key
+AWS Secret Key
+AWS Region (e.g., us-east-1)
+
+Retrive the S3 Bucket : 
+
+aws s3 ls s3://Bucket_name  (awstranscriptbucket-01)
+Displays all the items in the file
+
+Upload the Audio file from the Local env/ Database
+
+pip install boto3
+
+Run Uploadfile.py to upload the file
+
+
+aws transcribe start-transcription-job \
+    --transcription-job-name "MyFirstTranscriptionJob" \
+    --media MediaFileUri="s3://awstranscriptbucket-01/audio_1.mp3" \
+    --media-format mp3 \
+    --language-code en-US
+
+
+" There is a possible error occurrence here ! When you IAM User dont have Permission to AWSTranscribe and AWS S3 , 
+So make sure you have added these Permissions to the IAM User ".
+
+the above process is automated so run python file transcript_gen.py 
+
+
+
+FOR GEMINI API Connection : 
+
+Before hand , generate the Gemini API and save the API KEY,
+
+Install google-generativeai,
+
+
+For Creating PDF : 
+install reportlab
+
