@@ -90,4 +90,5 @@ Ensure you have the following installed:
 - [ ] Deploy on AWS/GCP
 - [ ] Mobile app version
 
+## Thanks to all Sponsors and Judges ! 
 
