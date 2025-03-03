@@ -47,7 +47,7 @@ def get_db_connection():
 
 
 # Configure Gemini AI
-genai.configure(api_key="AIzaSyAJhYD2ceqiLtluCUIR-6xH6r8cbj6Sl4I")  # Replace with actual API key
+genai.configure(api_key="")  # Replace with actual API key
 
 def process_transcription_pipeline():
     """Processes the latest audio file from S3, transcribes it, generates a medical report, and uploads the report & PDF to S3."""
@@ -98,7 +98,7 @@ def process_transcription_pipeline():
         """Uses Gemini AI to generate a structured medical report."""
         prompt = f"""
         Analyze the following doctor-patient conversation and generate a structured medical report:
-        ( In case of lack of information dont assume any hallucinations just leave the section empty )
+        ( In case of lack of information dont assume any hallucinations. Don't create any new sections.)
         ---
         {transcript_text}
         ---
