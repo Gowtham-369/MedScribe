@@ -14,7 +14,7 @@ The platform enables:
   - Suggestions and Medications
   - Results
   - Overall Summary
-- **Doctor approval workflow** before finalizing reports . ( For Our First MVP Proto - type model we haven't Implemented this Feature )
+- **Doctor approval workflow** before finalizing reports . ( For Our First MVP - working prototype, we haven't implemented this Feature )
 - **Secure storage** of medical data for each consultation.
 
 ## Features
@@ -37,29 +37,31 @@ The platform enables:
 - Encryption of stored medical data.
 
 ## Technology Stack
-- **Frontend**: React.js
-- **Backend**: Flask, Python
-- **Database**: RDS ( AWS ) 
+- **Frontend**: React.js, Tailwind CSS
+- **Backend**: Websocket(Socket.io), Node.js, Flask, Python, Boto3 (AWS SDK)
+- **Database**: AWS RDS 
 - **AI Services**: Gemini API (for report generation)
-- **Speech-to-Text**: AWS Transcribe
+- **Speech-to-Text**: AWS Transcribe for speech to text
 - **Video Calls**: WebRTC & Peer.js
-- **Authentication**: Basic authentication
+- **Authentication**: Basic Password based authentication
 - **Storage**: AWS S3 (for transcripts and reports)
 
 ## Installation & Setup
 ### Prerequisites
 Ensure you have the following installed:
 - Node.js (>=16.x)
+- Python (>=3.9)
 - AWS account with S3 and Transcribe access
 
 ### Steps to Run Locally
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/medscribe-revuc2025.git
+   git clone https://github.com/Gowtham-369/MedScribe.git
    cd medscribe-revuc2025
    ```
-2. Install dependencies:
-   ``` run sh requirments.txt file
+2. Navigate to the backend directory and Install dependencies:
+   ``` sh
+   pip install requirments.txt file
    ```
 3. Set up environment variables in a `.env` file:
    ```sh
@@ -67,13 +69,16 @@ Ensure you have the following installed:
    AWS_SECRET_ACCESS_KEY=your_aws_secret_key
    GEMINI_API_KEY=your_gemini_api_key
    ```
-4. Start the backend server:
-   ```sh
-   flask Run
-   ```
+4. Run the backend server apps chat_app.py and video_app.py:
+   ``` sh
+   cd backend
+   python3 video_app.py
+   python3 chat_app.py
+   ``` 
 5. Navigate to the frontend directory and start the client:
    ```sh
-   cd MedScride
+   cd frontend
+   npm install
    npm run dev
    ```
 
